@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Adicionar Novo Produto</h1>
+    
+    <form method="POST" action="{{ url_for('product_ctrl.new_product') }}">
+        
+        <div class="form-group">
+            <label for="name">Nome do Produto:</label>
+            <input type="text" id="name" name="name" required 
+                   value="{{ form.data.get('name', '') }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description">{{ form.data.get('description', '') }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="price">Preço (R$):</label>
+            <input type="number" id="price" name="price" step="0.01" required 
+                   value="{{ form.data.get('price', 0.00) }}">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Salvar Produto</button>
+        <a href="{{ url_for('product_ctrl.list_products') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}
