@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Meus Produtos</h1>
+    
+    <p><a href="{{ url_for('product_ctrl.new_product') }}" class="btn btn-primary">Adicionar Novo Produto</a></p>
+
+{% if products %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>R$ {{ "%.2f"|format(product.price) }}</td>
+                    <td>
+                        <a href="{{ url_for('product_ctrl.edit_product', product_id=product.id) }}">Editar</a> 
+                        | 
+                        <form action="{{ url_for('product_ctrl.delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="link-button" onclick="return confirm('Tem certeza que deseja excluir {{ product.name }}?')">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Você ainda não cadastrou nenhum produto.</p>
+    {% endif %}
+{% endblock %}
