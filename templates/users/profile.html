@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Perfil do Usuário</h1>
+    <div class="card">
+        <h2>Bem-vindo(a), {{ user.username }}!</h2>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p>Esta é a sua área de perfil. Você pode <a href="#">editar suas informações</a> aqui.</p>
+        <p><a href="{{ url_for('product_ctrl.list_products') }}" class="btn btn-secondary">Ver Meus Produtos</a></p>
+    </div>
+{% endblock %}
